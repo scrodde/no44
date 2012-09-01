@@ -10,9 +10,6 @@
 	<meta name="viewport" content="width=device-width">
 
 	<title><?php
-		/*
-		 * Print the <title> tag based on what is being viewed.
-		 */
 		global $page, $paged;
 
 		wp_title( '|', true, 'right' );
@@ -24,11 +21,6 @@
 		$site_description = get_bloginfo( 'description', 'display' );
 		if ( $site_description && ( is_home() || is_front_page() ) )
 			echo " | $site_description";
-
-		// Add a page number if necessary:
-		if ( $paged >= 2 || $page >= 2 )
-			echo ' | ' . sprintf( __( 'Page %s', 'twentyten' ), max( $paged, $page ) );
-
 		?>
 	</title>
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
@@ -48,52 +40,5 @@
 <div class="container">
 	
 	<div class="row" id="header">
-		<div class="span12">
-			
-		<?php /* Display featured posts if available and on frontpage.. */ ?>
-		<?php $q = hfm_query_featured_posts(); ?>
-		<?php if( (is_home() || is_front_page()) && $q->have_posts() ) : ?>
-
-			<div id="featuredWrapper" class="carousel slide">
-				<div class="carousel-inner">
-				<?php
-					while($q->have_posts()) : 
-						$q->the_post();
-						if( !($imgSrc = hfm_featured_image_src('large')) )
-							continue;
-				?>
-						<div class="item <?php echo ($q->current_post == 0) ? ' active ' : ''; ?>" id="slide-<?php the_ID(); ?>">
-							<img src="<?php echo $imgSrc[0] ?>" />
-							<div class="carousel-caption">
-								<h4 class="title"><?php the_title(); ?></h4>
-								<?php the_content(); ?>
-							</div>
-						</div>
-				<?php endwhile; ?>
-				</div> <!-- .carousel-inner -->
-				
-				<?php if($q->post_count > 1) : ?>
-  			  	<a class="carousel-control left" href="#featuredWrapper" data-slide="prev">&lsaquo;</a>
-  			  	<a class="carousel-control right" href="#featuredWrapper" data-slide="next">&rsaquo;</a>
-				<?php endif; ?>
-			</div>
-	
-		<?php endif; ?>
-		
-		<div class="row">
-			<div class="span2 logo">
-				<img src="http://placehold.it/100x100&text=HFM LOGO" />
-			</div>
-			<div class="span10">
-				<div class="navigation">
-					<?php wp_nav_menu( array('theme_location' => 'primary', 'container' => false) ); ?>
-					<div class="vertical-line">
-						<?php get_search_form( true ); ?>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		</div> <!-- .span12 -->
 	</div> <!-- #header -->
 
