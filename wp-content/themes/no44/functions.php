@@ -543,7 +543,7 @@ endif;
 	  
 	wp_enqueue_script( 'less', get_template_directory_uri() . '/assets/js/libs/less-1.3.0.min.js' );
 	wp_enqueue_script('modernizr', get_template_directory_uri() . '/assets/js/libs/modernizr-2.5.3.min.js');
-	wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/assets/js/libs/bootstrap.min.js', array( 'jquery' ) );
-	wp_enqueue_script( 'theme', get_template_directory_uri() . '/assets/js/script.js', array('jquery', 'modernizr', 'bootstrap') );
+	//wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/assets/js/libs/bootstrap.min.js', array( 'jquery' ) );
+	wp_enqueue_script( 'theme', get_template_directory_uri() . '/assets/js/script.js', array('jquery', 'modernizr', 'less') );
   }
   add_action('wp_enqueue_scripts', 'add_theme_scripts');

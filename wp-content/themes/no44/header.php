@@ -25,7 +25,6 @@
 	</title>
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-	<link rel="stylesheet" type="text/css" media="all" href="<?php bloginfo( 'template_url' ); ?>/assets/css/bootstrap.css" />
 	<link rel="stylesheet" type="text/less" media="all" href="<?php bloginfo( 'template_url' ); ?>/assets/less/style.less" />	
 <?php
 	if ( is_singular() && get_option( 'thread_comments' ) )
@@ -39,6 +38,6 @@
 
 <div class="container">
 	
-	<div class="row" id="header">
-	</div> <!-- #header -->
+	<header>
+	</header> <!-- #header -->
 
