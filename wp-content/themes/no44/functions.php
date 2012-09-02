@@ -106,8 +106,8 @@ function twentyten_setup() {
 		// The %s is a placeholder for the theme template directory URI.
 		'default-image' => '%s/images/headers/path.jpg',
 		// The height and width of our custom header.
-		'width' => apply_filters( 'twentyten_header_image_width', 940 ),
-		'height' => apply_filters( 'twentyten_header_image_height', 198 ),
+		'width' => apply_filters( 'twentyten_header_image_width', 200 ),
+		'height' => apply_filters( 'twentyten_header_image_height', 200 ),
 		// Support flexible heights.
 		'flex-height' => true,
 		// Don't support text inside the header image.
@@ -543,7 +543,12 @@ endif;
 	  
 	wp_enqueue_script( 'less', get_template_directory_uri() . '/assets/js/libs/less-1.3.0.min.js' );
 	wp_enqueue_script('modernizr', get_template_directory_uri() . '/assets/js/libs/modernizr-2.5.3.min.js');
-	//wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/assets/js/libs/bootstrap.min.js', array( 'jquery' ) );
-	wp_enqueue_script( 'theme', get_template_directory_uri() . '/assets/js/script.js', array('jquery', 'modernizr', 'less') );
+	wp_enqueue_script('jquery.scrollTo', get_template_directory_uri() . '/assets/js/libs/jquery.scrollTo-min.js', array('jquery'));
+		
+	wp_enqueue_script( 'bootstrap-carousel', get_template_directory_uri() . '/assets/js/libs/bootstrap-carousel.js', array( 'jquery' ) );
+	wp_enqueue_script( 'bootstrap-scrollspy', get_template_directory_uri() . '/assets/js/libs/bootstrap-scrollspy.js', array( 'jquery' ) );
+	
+	
+	wp_enqueue_script( 'theme', get_template_directory_uri() . '/assets/js/script.js', array('jquery', 'modernizr', 'less', 'jquery.scrollTo') );
   }
   add_action('wp_enqueue_scripts', 'add_theme_scripts');
