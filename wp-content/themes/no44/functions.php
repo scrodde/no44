@@ -535,6 +535,10 @@ endif;
   }
   
 
+  function theme_permalink() {
+	  return 'ass';
+  }
+  add_filter('the_permalink', 'theme_permalink');
 
   function add_theme_scripts() {
   	wp_deregister_script( 'jquery' );
