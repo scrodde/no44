@@ -3,11 +3,11 @@ function resizeSections() {
 	$('.section').not('#intro').css('min-height', minHeight + 'px');
 }
 
-function updateIndicator(indicator, carousel) {
-	var index = $('.carousel-inner').index($('.item .active'));
-	var links = indicator.find('a');
-	links.html("\\");
-	links.get(index).html("/\\");
+function updateIndicator(carousel) {
+	var index = $('.item.active', carousel).index();
+	var links = $('.indicator a', carousel);
+	links.removeClass('active');
+	links.eq(index).addClass('active');
 }
 
 $(document).ready(function() {
@@ -16,7 +16,7 @@ $(document).ready(function() {
 		resizeSections();
 	});
 	
-	$('a[href^="#"]').not('#slideshow a').click(function(event) {
+	$('a[href^="#"]').not('.carousel a').click(function(event) {
 		event.preventDefault();
 		var offset = 0;
 		if( $('#wpadminbar').length != 0 ) {
@@ -27,11 +27,20 @@ $(document).ready(function() {
 	
 	
 	$('.carousel').carousel({pause: "hover"})
-		.bind('slide', function(event) {
-			updateIndicator($('#intro .indicator'), $(this));
+		.bind('slid', function(event) {
+			updateIndicator($(this));
+	}).each(function() {
+		updateIndicator($(this));
+	});
+	$('.carousel .indicator a').click(function() {
+		event.preventDefault();
+		var index = $(this).index();
+		$(this).closest('.carousel').carousel(index);
+		console.log(index);
 	});
 	
 });
+
 
 
 

@@ -20,45 +20,120 @@
 		
 		<div class="span8">
 			
+			<?php 
+				$page = get_page_by_title("Frontpage");
+
+				$images = get_posts(array(
+				    'post_type'      => 'attachment',
+				    'post_mime_type' => 'image',
+				    'numberposts'    => 3,
+				    'post_status'    => null,
+					'post_parent' 	 => 0,
+				    'orderby'        => 'rand',
+				  ));
+
+				if($images) :
+			?>
 			<div class="section" id="intro">
-				
-			<div class="carousel" id="slideshow">
-				<div class="carousel-inner">
-					<?php for($i = 1; $i <= 3; $i++) : ?>
-						<div class="<?php echo ($i === 1) ? ' active ' : ''; ?> item ">
-							<img src="<?php bloginfo( 'template_url' ); ?>/assets/img/tmp/<?php echo $i ?>.jpg" />
-						</div>
-					<?php endfor; ?>
-				</div>
+
+				<div class="carousel" id="slideshow">
+					<div class="carousel-inner">
+					<?php 
+						$i = 0;
+						foreach($images as $img) :
+							$img_data = wp_get_attachment_image_src($img->ID, 'full', false);
+					 ?>
 					
-				<a class="carousel-control left" href="#slideshow" data-slide="prev">&lsaquo;</a>
-				<a class="carousel-control right" href="#slideshow" data-slide="next">&rsaquo;</a>
+						<div class="item <?php echo ($i === 0) ? ' active ' : ''; ?>">
+							<img src="<?php echo $img_data[0] ?>" />
+						</div>
+					<?php $i++; ?>
+					<?php endforeach; ?>
+					</div>
+					
+					<a class="carousel-control left" href="#slideshow" data-slide="prev">&lsaquo;</a>
+					<a class="carousel-control right" href="#slideshow" data-slide="next">&rsaquo;</a>
+					
+					<div class="indicator pull-right">
+						<?php for($i = 0; $i < count($images); $i++) : ?>
+						<a href="#" class="<?php echo ($i === 0) ? 'active': ''; ?>"><span>/</span>\</a>
+						<?php endfor; ?>	
+					</div>
+				</div>
+			
 			</div>
 			
-			<div class="indicator pull-right">
-				<a>/\</a>
-				<a>\</a>
-				<a>\</a>
-			</div>
-			</div>
+			<?php endif; ?> <!-- end intro -->
 			
+			<?php
+				
+				$work_category = get_category_by_slug('work');
+				$args = array( 	'numberposts' => 10,
+								'category' => (int)$work_category->term_id
+							);
+				$posts = get_posts($args);
+			?>
 			<div id="work" class="section"> <!-- work -->
 				<h2>work</h2>
+				
 				<div class="thumbnails">
-				<?php for($i = 0; $i < 7; $i++) : ?>
+				<?php foreach($posts as $post) : setup_postdata($post); ?>
 					<div class="project-thumbnail view view-first">
-						<img src="<?php bloginfo( 'template_url' ); ?>/assets/img/tmp/logo.png"/>
+						<?php $img_data = theme_featured_image_src('full'); ?>
+						<img src="<?php echo $img_data[0]; ?>"/>
 						<div class="mask">  
-							<h2>Title</h2>  
-						    <p>Your Text</p>  
+							<h2><?php the_title(); ?></h2>  
+						    <p><?php the_excerpt(); ?></p>  
 						     <a href="#" class="info">Read More</a>  
 						 </div>  
 					</div>
-				<?php endfor; ?>
+				<?php endforeach; ?>
 				</div>
 				
 				<div id="project-list">
-	
+					<?php foreach($posts as $post) : setup_postdata($post);
+						$images = get_posts(array(
+						    'post_type'      => 'attachment',
+						    'post_mime_type' => 'image',
+						    'numberposts'    => 3,
+						    'post_status'    => null,
+							'post_parent' 	 => 0,
+						    'orderby'        => 'rand',
+						  ));
+					?>
+					<div class="project">
+						<div class="carousel" id="carousel-<?php echo $post->ID; ?>">
+							<div class="carousel-inner">
+							<?php 
+								$i = 0;
+								foreach($images as $img) :
+									$img_data = wp_get_attachment_image_src($img->ID, 'full', false);
+							 ?>
+					
+								<div class="item <?php echo ($i === 0) ? ' active ' : ''; ?>">
+									<img src="<?php echo $img_data[0] ?>" />
+								</div>
+							<?php $i++; ?>
+							<?php endforeach; ?>
+							</div>
+					
+							<a class="carousel-control left" href="#carousel-<?php echo $post->ID; ?>" data-slide="prev">&lsaquo;</a>
+							<a class="carousel-control right" href="#carousel-<?php echo $post->ID; ?>" data-slide="next">&rsaquo;</a>
+					
+							<div class="indicator pull-right">
+								<?php for($i = 0; $i < count($images); $i++) : ?>
+								<a href="#" class="<?php echo ($i === 0) ? 'active': ''; ?>"><span>/</span>\</a>
+								<?php endfor; ?>	
+							</div>
+						</div>
+						
+						<div class="content">
+							<h3><?php the_title(); ?></h3>
+							<?php the_content(); ?>
+						</div>
+
+					</div>
+					<?php endforeach; ?>
 				</div>
 				
 			</div> <!-- work -->
@@ -82,10 +157,6 @@
 				<?php endif ?>
 			</div> <!-- news -->
 			
-			<div id="us" class="section"> <!-- us -->
-				<h2>us</h2>
-				<img src="<?php bloginfo( 'template_url' ); ?>/assets/img/tmp/Us1.jpg"/>
-			</div> <!-- us -->
 			
 			<div id="contact" class="section">
 				<h2>contact</h2>

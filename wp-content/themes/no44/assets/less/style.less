@@ -44,7 +44,6 @@ a {
 }
 
 .section {
-	overflow: hidden;
 	.clearfix;
 }
 
@@ -88,6 +87,10 @@ a {
 	position: relative;
 }
 
+.project {
+	margin-bottom: 80px;
+}
+
 #side-two {
 	margin-top: 100px;
 }
@@ -96,6 +99,42 @@ a {
 	width: 100%;
 	height: 390px;
 	.clearfix;
+	
+	.item {
+		img {
+			width: 100%;
+			height: auto;
+			max-height: 390px;	
+		}
+	}
+	
+	.indicator {
+		margin-right: 15px;
+		line-height: 20px;
+		a {
+			color: black;
+			cursor: pointer;
+			padding: 0px 5px;
+			float: left;
+		
+			&:hover {
+				text-decoration: none;
+				color: #999;
+			}
+			
+			span {
+				visibility: hidden;
+			}
+			
+			&.active {
+				color: #999;
+				
+				span {
+					visibility: visible;
+				}
+			}
+		}
+	}
 }
 
 .carousel-control {
@@ -110,30 +149,16 @@ a {
 	}
 }
 
+.carousel-control.right {
+	right: -45px;
+}
+.carousel-control.left {
+	left: -45px;
+}
+
 #thumbnails {
 	overflow: hidden;
 }
-
-#project-list {
-	margin-top: 30px;
-}
-
-#project-list {
-	.carousel {
-		height: 490px;
-		
-		.indicator {
-			margin-top: -50px;
-		}
-	}
-}
-
-.project {
-	.description {
-		height: 140px;
-	}
-}
-
 
 .news-post {
 	overflow: hidden;
@@ -141,15 +166,16 @@ a {
 	
 	h3 {
 		width: 25%;
-		font-weigth: bold;
 		text-align: right;
 		margin-top: 0;
+		letter-spacing: 1px;
 		
 		.delimeter {
 			font-size: 44px;
 			vertical-align: middle;
 			letter-spacing: -1px;
 			margin-right: 15px;
+			margin-left: 4px;
 		}
 		float: left;
 	}
@@ -161,18 +187,7 @@ a {
 	}
 }
 
-.indicator {
-	margin-right: 15px;
-	a {
-		color: black;
-		cursor: pointer;
-		padding: 0px 4px;
-		
-		&:hover {
-			text-decoration: none;
-		}
-	}
-}
+
 
 #contact {
 	p, h3 {

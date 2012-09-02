@@ -516,7 +516,7 @@ endif;
  * MILK + CHOCOLATE
  */
  
- function hfm_query_featured_posts() {
+ function theme_query_featured_posts() {
 	 $args = array(
 	 	'tax_query' => array(
 	 		array(
@@ -529,16 +529,21 @@ endif;
 	 return new WP_Query($args);
   }
  
-  function hfm_featured_image_src($size = 'thumbnail', $icon = false) {
+  function theme_featured_image_src($size = 'thumbnail', $icon = false) {
 	  global $post;
 	  return wp_get_attachment_image_src(get_post_thumbnail_id( $post->ID ), $size, $icon);
   }
   
 
-  function theme_permalink() {
-	  return 'ass';
+  function remove_images( $content ) {
+	  global $post;
+	  
+	  if( in_category('work') ) {
+      	$content = preg_replace('/<img[^>]+./','', $content);
+	  }
+     return $content;
   }
-  add_filter('the_permalink', 'theme_permalink');
+  add_filter( 'the_content', 'remove_images', 100 );
 
   function add_theme_scripts() {
   	wp_deregister_script( 'jquery' );
