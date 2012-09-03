@@ -11,7 +11,6 @@ function updateIndicator(carousel) {
 }
 
 $(document).ready(function() {
-	resizeSections();
 	$(window).resize(function(event) {
 		resizeSections();
 	});
@@ -39,6 +38,8 @@ $(document).ready(function() {
 		console.log(index);
 	});
 	
+	
+	resizeSections();
 });
 
 

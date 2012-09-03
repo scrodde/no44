@@ -28,14 +28,10 @@
 	<link href="<?php bloginfo( 'template_url' ); ?>/favicon.ico" rel="icon" type="image/x-icon" />
 	<link rel="stylesheet" type="text/less" media="all" href="<?php bloginfo( 'template_url' ); ?>/assets/less/style.less" />	
 <?php
-	if ( is_singular() && get_option( 'thread_comments' ) )
-		wp_enqueue_script( 'comment-reply' );
-
 	wp_head();
 ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body <?php body_class(); ?> >
 
-<div class="container">
-
+<header></header>

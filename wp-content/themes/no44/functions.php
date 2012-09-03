@@ -558,7 +558,7 @@ endif;
 	wp_enqueue_script( 'bootstrap-carousel', get_template_directory_uri() . '/assets/js/libs/bootstrap-carousel.js', array( 'jquery' ) );
 	wp_enqueue_script( 'bootstrap-scrollspy', get_template_directory_uri() . '/assets/js/libs/bootstrap-scrollspy.js', array( 'jquery' ) );
 	
-	
 	wp_enqueue_script( 'theme', get_template_directory_uri() . '/assets/js/script.js', array('jquery', 'modernizr', 'less', 'jquery.scrollTo') );
+	
   }
   add_action('wp_enqueue_scripts', 'add_theme_scripts');
