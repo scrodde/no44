@@ -1,6 +1,9 @@
+var lastScroll = 0;
+var scrollDelta = 0;
+
 function resizeSections() {
 	var minHeight = $(window).height(); 
-	$('.section').not('#intro').css('min-height', minHeight + 'px');
+	$('.section').css('min-height', minHeight + 'px');
 }
 
 function updateIndicator(carousel) {
@@ -19,7 +22,7 @@ $(document).ready(function() {
 		event.preventDefault();
 		var offset = 0;
 		if( $('#wpadminbar').length != 0 ) {
-			offset = -$('#wpadminbar').height();
+			offset = -$('#wpadminbar').height()+2;
 		}
 		$(document).scrollTo($(this).attr('href'), 500, {axis: 'y', offset: offset});
 	});
@@ -40,6 +43,22 @@ $(document).ready(function() {
 	});
 	
 	$('.nav').scrollspy();
+	
+	var usPage = $('#us');
+	$(window).scroll(function(event) {
+		scrollDelta = lastScroll - $(window).scrollTop();
+		
+		$('.nav a').each(function() {
+			$this = $(this);
+			if( (($this.offset().top + $this.height())  > usPage.offset().top) &&
+				(($this.offset().top + $(this).height()) < (usPage.offset().top + usPage.height())) ){
+				$this.addClass('white');
+			}else {
+				$this.removeClass('white');
+			}
+		});
+		lastScroll = $(window).scrollTop();
+	});
 	
 	resizeSections();
 });
