@@ -31,6 +31,7 @@ $(document).ready(function() {
 	}).each(function() {
 		updateIndicator($(this));
 	});
+	
 	$('.carousel .indicator a').click(function() {
 		event.preventDefault();
 		var index = $(this).index();
@@ -38,6 +39,7 @@ $(document).ready(function() {
 		console.log(index);
 	});
 	
+	$('.nav').scrollspy();
 	
 	resizeSections();
 });

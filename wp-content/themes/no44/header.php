@@ -32,6 +32,6 @@
 ?>
 </head>
 
-<body <?php body_class(); ?> >
+<body data-spy="scroll" data-target=".nav" <?php body_class(); ?> >
 
 <header></header>

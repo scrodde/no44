@@ -6,7 +6,7 @@
 	get_header();
 ?>
 
-<div id="main" data-spy="scroll" data-target=".nav">
+<div id="main">
 	<div class="row">
 		
 		<div class="span2">
