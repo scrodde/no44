@@ -553,7 +553,8 @@ endif;
 	wp_enqueue_script( 'less', get_template_directory_uri() . '/assets/js/libs/less-1.3.0.min.js' );
 	wp_enqueue_script('modernizr', get_template_directory_uri() . '/assets/js/libs/modernizr-2.5.3.min.js');
 	wp_enqueue_script('jquery.scrollTo', get_template_directory_uri() . '/assets/js/libs/jquery.scrollTo-min.js', array('jquery'));
-		
+	wp_enqueue_script( 'bootstrap-transition', get_template_directory_uri() . '/assets/js/libs/bootstrap-transition.js', array( 'jquery' ) );
+	
 	wp_enqueue_script( 'bootstrap-carousel', get_template_directory_uri() . '/assets/js/libs/bootstrap-carousel.js', array( 'jquery' ) );
 	wp_enqueue_script( 'bootstrap-scrollspy', get_template_directory_uri() . '/assets/js/libs/bootstrap-scrollspy.js', array( 'jquery' ) );
 	

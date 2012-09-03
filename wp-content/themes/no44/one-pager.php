@@ -36,7 +36,7 @@
 			?>
 			<div class="section" id="intro">
 
-				<div class="carousel" id="slideshow">
+				<div class="carousel slide" id="slideshow">
 					<div class="carousel-inner">
 					<?php 
 						$i = 0;
@@ -102,7 +102,7 @@
 						  ));
 					?>
 					<div class="project">
-						<div class="carousel" id="carousel-<?php echo $post->ID; ?>">
+						<div class="carousel slide" id="carousel-<?php echo $post->ID; ?>">
 							<div class="carousel-inner">
 							<?php 
 								$i = 0;
