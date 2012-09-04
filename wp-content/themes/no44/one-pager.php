@@ -8,7 +8,7 @@
 <div class="container section" id="work">
 	<div class="row">
 		<div class="span1">
-			<ul class="xoxo" id="widget-area-one">
+			<ul class="xoxo widget-area-one" id="widget-area-one">
 			<?php if ( function_exists( 'get_custom_header' ) ) : ?>
 				<li><ul><li><img id="logo" src="<?php header_image(); ?>" /></li></ul><li>
 			<?php endif; ?>
@@ -17,7 +17,7 @@
 		</div>
 		
 		<div class="span1 offset10">
-			<ul class="xoxo" id="widget-area-two">
+			<ul class="xoxo widget-area-two" id="widget-area-two">
 				<li>
 					<?php wp_nav_menu(array('container' => false, 'menu_class' => 'nav')); ?>
 				</li>
@@ -42,61 +42,66 @@
 					);
 				endwhile;
 				
-				if($images) :
+				if($images) {
+					theme_render_slideshow($images, 'slideshow');
+				}
 			?>
-
-			<div class="carousel slide" id="slideshow">
-				<div class="carousel-inner">
-				<?php 
-					$i = 0;
-					foreach($images as $img) :
-						$img_data = wp_get_attachment_image_src($img->ID, 'full', false);
-				 ?>
-					
-					<div class="item <?php echo ($i === 0) ? ' active ' : ''; ?>">
-						<img src="<?php echo $img_data[0]; ?>" />
-					</div>
-				<?php $i++; ?>
-				<?php endforeach; ?>
-				</div>
-					
-				<a class="carousel-control left" href="#slideshow" data-slide="prev">&lsaquo;</a>
-				<a class="carousel-control right" href="#slideshow" data-slide="next">&rsaquo;</a>
-					
-				<div class="indicator pull-right">
-					<?php for($i = 0; $i < count($images); $i++) : ?>
-					<a href="#" class="<?php echo ($i === 0) ? 'active': ''; ?>"><span>/</span>\</a>
-					<?php endfor; ?>	
-				</div>
-			</div>
-			
-			
-		<?php endif; ?> 
 		</div>
 	</div> <!-- .row -->
 	
 	<?php
 		$work_category = get_category_by_slug('work');
 		$args = array( 	'numberposts' => -1,
-						'category' => (int)$work_category->term_id
-					);
+						'category' => (int)$work_category->term_id,
+						'orderby' => 'menu_order',
+						'order' => 'ASC'
+ 					);
 		$posts = get_posts($args); 
 	?>
 
-	<div class="row" class="project-thumbnails">
+	<div class="row project-thumbnails">
 		<div class="span10 offset1">
 			<h2>work</h2>
-			<div class="row">
+			<div class="thumb-container">
 			<?php foreach($posts as $post) : setup_postdata($post); ?>
 				<?php  $img_data  = theme_featured_image_src('thumbnail'); ?>
-				<div class="span2">
 					<div class="project-thumbnail">
 						<img src="<?php echo $img_data[0]; ?>" />
-						<div class="mask"><?php the_title(); ?></div>
+						<div class="mask">
+						<a href="<?php the_permalink(); ?>">
+							<img src="<?php bloginfo("template_url"); ?>/assets/img/info_painike2.png" />
+						</a>
+						</div>
 					</div>
-				</div>
 			<?php endforeach; ?>
 			</div>
+		</div>
+	</div>
+	
+	<div class="row" id="project-listing">
+		<div class="span10 offset1">
+			<?php foreach($posts as $post) : 
+				setup_postdata($post);
+				$images = get_children( array( 
+					'post_parent' => $post->ID, 
+					'post_type' => 'attachment', 
+					'post_mime_type' => 'image', 
+					'orderby' => 'menu_order', 
+					'order' => 'ASC', 
+					'numberposts' => 999,
+					'exclude' => get_post_thumbnail_id($post->ID) )
+				);
+				?>
+				<div class="project" id="project-<?php echo $post->ID; ?>">
+					
+				<?php if($images) {
+					theme_render_slideshow($images, 'project-slideshow'.$post->ID);
+				}
+			?>
+				<h3><?php the_title(); ?></h3>
+				<div class="content"><?php the_content(); ?></div>
+				</div>
+			<?php endforeach; ?>
 		</div>
 	</div>
 	
@@ -138,8 +143,8 @@
 	 $us_page = get_page_by_title("us");
 	$img_data = wp_get_attachment_image_src(get_post_thumbnail_id($us_page->ID), 'full', false);
 ?>
-<div id="us" class="section" style="background: url('<?php echo $img_data[0]; ?>') no-repeat center center scroll;">
-	<div class="container">
+<div id="us" class="" style="background-image: url('<?php echo $img_data[0]; ?>');">
+	<div class="container section">
 		<div class="row">
 			<div class="span10 offset1">
 				<h2><?php echo apply_filters('the_title', $us_page->post_title); ?></h2>

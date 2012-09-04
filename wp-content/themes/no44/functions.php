@@ -265,7 +265,7 @@ function twentyten_continue_reading_link() {
 function twentyten_auto_excerpt_more( $more ) {
 	return ' &hellip;' . twentyten_continue_reading_link();
 }
-add_filter( 'excerpt_more', 'twentyten_auto_excerpt_more' );
+//add_filter( 'excerpt_more', 'twentyten_auto_excerpt_more' );
 
 /**
  * Adds a pretty "Continue Reading" link to custom post excerpts.
@@ -277,12 +277,12 @@ add_filter( 'excerpt_more', 'twentyten_auto_excerpt_more' );
  * @return string Excerpt with a pretty "Continue Reading" link
  */
 function twentyten_custom_excerpt_more( $output ) {
-	if ( has_excerpt() && ! is_attachment() ) {
-		$output .= twentyten_continue_reading_link();
+	if(in_catgory('work')) {
+		$output = '';
 	}
 	return $output;
 }
-add_filter( 'get_the_excerpt', 'twentyten_custom_excerpt_more' );
+//add_filter( 'get_the_excerpt', 'twentyten_custom_excerpt_more' );
 
 /**
  * Remove inline styles printed when the gallery shortcode is used.
@@ -544,6 +544,47 @@ endif;
      return $content;
   }
   add_filter( 'the_content', 'remove_images', 100 );
+  
+  
+  function theme_render_slideshow($images, $id = '') {
+	?>
+	<div class="carousel slide" id="<?php echo $id; ?>">
+		<div class="carousel-inner">
+		<?php 
+			$i = 0;
+			foreach($images as $img) :
+				$img_data = wp_get_attachment_image_src($img->ID, 'full', false);
+		 ?>
+					
+			<div class="item <?php echo ($i === 0) ? ' active ' : ''; ?>">
+				<img src="<?php echo $img_data[0]; ?>" />
+			</div>
+		<?php $i++; ?>
+		<?php endforeach; ?>
+		</div>
+				
+		<?php if(count($images) > 1) : ?>
+		<a class="carousel-control left" href="#<?php echo $id; ?>" data-slide="prev">&lsaquo;</a>
+		<a class="carousel-control right" href="#<?php echo $id; ?>" data-slide="next">&rsaquo;</a>
+				
+		<div class="indicator pull-right">
+			<?php for($i = 0; $i < count($images); $i++) : ?>
+			<a href="#" class="<?php echo ($i === 0) ? 'active': ''; ?>"><span>/</span>\</a>
+			<?php endfor; ?>	
+		</div>
+		<?php endif; ?>
+	</div>
+	<?php
+	}
+  
+	function theme_permalinks($link) {
+		global $post;
+		if(in_category('work')) {
+			$link = "#project-".$post->ID;
+		}
+		return $link;
+	}
+	add_filter('the_permalink', 'theme_permalinks');
 
   function add_theme_scripts() {
   	wp_deregister_script( 'jquery' );

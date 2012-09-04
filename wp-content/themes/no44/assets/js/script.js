@@ -1,5 +1,4 @@
-var lastScroll = 0;
-var scrollDelta = 0;
+
 
 function resizeSections() {
 	var minHeight = $(window).height(); 
@@ -13,9 +12,16 @@ function updateIndicator(carousel) {
 	links.eq(index).addClass('active');
 }
 
+function positionFloats() {
+	
+	$('#widget-area-one').css('left', $('#work').offset().left - $('#widget-area-one').width() +'px');
+	$('#widget-area-two').css('left', $('#work').offset().left + $('#work').width() - 50 + 'px');
+}
+
 $(document).ready(function() {
 	$(window).resize(function(event) {
 		resizeSections();
+		positionFloats();
 	});
 	
 	$('a[href^="#"]').not('.carousel a').click(function(event) {
@@ -28,8 +34,17 @@ $(document).ready(function() {
 	});
 	
 	
-	$('.carousel').carousel({pause: "hover"})
-		.bind('slid', function(event) {
+	$('#slideshow.carousel').carousel({
+		pause: "hover",
+		interval: 5000
+	});
+	
+	$('#project-listing .carousel').carousel({
+		pause: "hover",
+		interval: 5000000
+	});
+	
+	$('.carousel').bind('slid', function(event) {
 			updateIndicator($(this));
 	}).each(function() {
 		updateIndicator($(this));
@@ -39,14 +54,12 @@ $(document).ready(function() {
 		event.preventDefault();
 		var index = $(this).index();
 		$(this).closest('.carousel').carousel(index);
-		console.log(index);
 	});
 	
 	$('.nav').scrollspy();
 	
 	var usPage = $('#us');
 	$(window).scroll(function(event) {
-		scrollDelta = lastScroll - $(window).scrollTop();
 		
 		$('.nav a').each(function() {
 			$this = $(this);
@@ -57,10 +70,10 @@ $(document).ready(function() {
 				$this.removeClass('white');
 			}
 		});
-		lastScroll = $(window).scrollTop();
 	});
 	
 	resizeSections();
+	positionFloats();
 });
 
 
