@@ -66,12 +66,10 @@
 			<?php foreach($posts as $post) : setup_postdata($post); ?>
 				<?php  $img_data  = theme_featured_image_src('thumbnail'); ?>
 					<div class="project-thumbnail">
-						<img src="<?php echo $img_data[0]; ?>" />
-						<div class="mask">
 						<a href="<?php the_permalink(); ?>">
-							<img src="<?php bloginfo("template_url"); ?>/assets/img/info_painike2.png" />
+						
+						<img src="<?php echo $img_data[0]; ?>" />
 						</a>
-						</div>
 					</div>
 			<?php endforeach; ?>
 			</div>
