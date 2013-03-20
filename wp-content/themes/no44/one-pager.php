@@ -32,19 +32,8 @@
 			
 			<?php 
 				while(have_posts() ): the_post();
-					$images = get_children( array( 
-						'post_parent' => $post->ID, 
-						'post_type' => 'attachment', 
-						'post_mime_type' => 'image', 
-						'orderby' => 'menu_order', 
-						'order' => 'ASC', 
-						'numberposts' => 999 )
-					);
+					the_content();
 				endwhile;
-				
-				if($images) {
-					theme_render_slideshow($images, 'slideshow');
-				}
 			?>
 		</div>
 	</div> <!-- .row -->
