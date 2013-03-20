@@ -516,90 +516,32 @@ endif;
  * MILK + CHOCOLATE
  */
  
- function theme_query_featured_posts() {
-	 $args = array(
-	 	'tax_query' => array(
-	 		array(
-	 			'taxonomy' => 'post_format',
-	 			'field' => 'slug',
-	 			'terms' => array( 'post-format-gallery' )
-	 		)
-	 	)
-	 );
-	 return new WP_Query($args);
-  }
- 
-  function theme_featured_image_src($size = 'thumbnail', $icon = false) {
-	  global $post;
-	  return wp_get_attachment_image_src(get_post_thumbnail_id( $post->ID ), $size, $icon);
-  }
-  
-
-  function remove_images( $content ) {
-	  global $post;
-	  
-	  if( in_category('work') ) {
-      	$content = preg_replace('/<img[^>]+./','', $content);
-	  }
-     return $content;
-  }
-  add_filter( 'the_content', 'remove_images', 100 );
-  
-  
-  function theme_render_slideshow($images, $id = '') {
-	?>
-	<div class="carousel slide" id="<?php echo $id; ?>">
-		<div class="carousel-inner">
-		<?php 
-			$i = 0;
-			foreach($images as $img) :
-				$img_data = wp_get_attachment_image_src($img->ID, 'full', false);
-		 ?>
-					
-			<div class="item <?php echo ($i === 0) ? ' active ' : ''; ?>">
-				<img src="<?php echo $img_data[0]; ?>" />
-			</div>
-		<?php $i++; ?>
-		<?php endforeach; ?>
-		</div>
-				
-		<?php if(count($images) > 1) : ?>
-		<a class="carousel-control left" href="#<?php echo $id; ?>" data-slide="prev">&lsaquo;</a>
-		<a class="carousel-control right" href="#<?php echo $id; ?>" data-slide="next">&rsaquo;</a>
-				
-		<div class="indicator pull-right">
-			<?php for($i = 0; $i < count($images); $i++) : ?>
-			<a href="#" class="<?php echo ($i === 0) ? 'active': ''; ?>"><span>/</span>\</a>
-			<?php endfor; ?>	
-		</div>
-		<?php endif; ?>
-	</div>
-	<?php
+function theme_featured_image_src($size = 'thumbnail', $icon = false) {
+  global $post;
+  return wp_get_attachment_image_src(get_post_thumbnail_id( $post->ID ), $size, $icon);
+}
+    
+function theme_permalinks($link) {
+	global $post;
+	if(in_category('work')) {
+		$link = "#project-".$post->ID;
 	}
-  
-	function theme_permalinks($link) {
-		global $post;
-		if(in_category('work')) {
-			$link = "#project-".$post->ID;
-		}
-		return $link;
-	}
-	add_filter('the_permalink', 'theme_permalinks');
+	return $link;
+}
+add_filter('the_permalink', 'theme_permalinks');
 
-  function add_theme_scripts() {
-  	wp_deregister_script( 'jquery' );
-    wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js');
-    wp_enqueue_script( 'jquery' );
-	  
+function add_theme_scripts() {
+	wp_deregister_script( 'jquery' );
+	wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js');
+	wp_enqueue_script( 'jquery' );
+  
 	wp_enqueue_script( 'less', get_template_directory_uri() . '/assets/js/libs/less-1.3.0.min.js' );
 	wp_enqueue_script('modernizr', get_template_directory_uri() . '/assets/js/libs/modernizr-2.5.3.min.js');
 	wp_enqueue_script('jquery.scrollTo', get_template_directory_uri() . '/assets/js/libs/jquery.scrollTo-min.js', array('jquery'));
-	wp_enqueue_script( 'bootstrap-transition', get_template_directory_uri() . '/assets/js/libs/bootstrap-transition.js', array( 'jquery' ) );
-	
-	wp_enqueue_script( 'bootstrap-carousel', get_template_directory_uri() . '/assets/js/libs/bootstrap-carousel.js', array( 'jquery' ) );
+	wp_enqueue_script('google.maps', "http".($_SERVER['SERVER_PORT'] == 443 ? "s" : "") . "://maps.googleapis.com/maps/api/js?sensor=true", array(), null, true);
 	wp_enqueue_script( 'bootstrap-scrollspy', get_template_directory_uri() . '/assets/js/libs/bootstrap-scrollspy.js', array( 'jquery' ) );
-	
-	wp_enqueue_script( 'theme', get_template_directory_uri() . '/assets/js/script.js', array('jquery', 'modernizr', 'less', 'jquery.scrollTo') );
-	
-  }
-  add_action('wp_enqueue_scripts', 'add_theme_scripts');
+
+	wp_enqueue_script( 'theme', get_template_directory_uri() . '/assets/js/script.js', array('jquery', 'modernizr', 'less', 'jquery.scrollTo', 'google.maps') );
+
+}
+add_action('wp_enqueue_scripts', 'add_theme_scripts');

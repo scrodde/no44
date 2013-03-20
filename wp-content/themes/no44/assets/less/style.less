@@ -99,6 +99,15 @@ a {
 
 .section {
 	//.clearfix;
+	position: relative;
+}
+
+#map-me {
+	position: absolute;
+	width: 100%;
+	bottom: 25px;
+	left: 0;
+	height: 350px;
 }
 
 .royalSlider {
@@ -188,11 +197,39 @@ a img.aligncenter {
     padding: 0 4px 5px;
 }
 
+.gallery {
+	margin: auto;
+	
+	.gallery-item {
+		box-sizing: border-box;
+		float: left;
+		margin-top: 10px;
+		text-align: center;
+		width: 25%;
+		max-height: 300px;
+		text-overflow: ellipsis;
+	}
+	.gallery-icon {
+		a {
+			display: block;
+		}
+	}
+	img {
+		border: 0 none;
+		width: 150px !important;
+		height: 150px !important;
+	}
+	.gallery-caption {
+		margin: 0 auto;
+		width: 150px;
+	}
+}
+
 
 
 .widget-area-one,
 .widget-area-two {
-	z-index: 2000;
+	z-index: 1000;
 }
 
 .widget-area-one {
@@ -281,6 +318,7 @@ a img.aligncenter {
 	cursor: pointer;
 	background: #FFF;
 }
+
 .project-thumbnail .content {
     width: 150px;
     height: 150px;

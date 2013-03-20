@@ -47,11 +47,17 @@ function generateMap(target, markerPositions) {
 	var mapOptions = {
 		zoom: 15,
 		scrollwheel: false,
-		navigationControl: false,
+		navigationControl: true,
 		center: marker,
 		mapTypeId: google.maps.MapTypeId.ROADMAP,
 		disableDefaultUI: true,
-		styles: style,
+	    panControl: true,
+	    zoomControl: true,
+	    mapTypeControl: false,
+	    scaleControl: true,
+	    streetViewControl: false,
+	    overviewMapControl: true
+		//styles: style,
 	};
 	var map = new google.maps.Map(target.get(0),
 		mapOptions);
@@ -65,13 +71,6 @@ function generateMap(target, markerPositions) {
 function resizeSections() {
 	var minHeight = $(window).height(); 
 	$('.section').css('min-height', minHeight + 'px');
-}
-
-function updateIndicator(carousel) {
-	var index = $('.item.active', carousel).index();
-	var links = $('.indicator a', carousel);
-	links.removeClass('active');
-	links.eq(index).addClass('active');
 }
 
 function positionFloats() {
@@ -96,28 +95,6 @@ $(document).ready(function() {
 	});
 	
 	
-	$('#slideshow.carousel').carousel({
-		pause: "hover",
-		interval: 5000
-	});
-	
-	$('#project-listing .carousel').carousel({
-		pause: "hover",
-		interval: 5000000
-	});
-	
-	$('.carousel').bind('slid', function(event) {
-			updateIndicator($(this));
-	}).each(function() {
-		updateIndicator($(this));
-	});
-	
-	$('.carousel .indicator a').click(function() {
-		event.preventDefault();
-		var index = $(this).index();
-		$(this).closest('.carousel').carousel(index);
-	});
-	
 	$('.nav').scrollspy();
 	
 	var usPage = $('#us');
@@ -132,6 +109,12 @@ $(document).ready(function() {
 				$this.removeClass('white');
 			}
 		});
+	});
+	
+	$('.google-maps-init').each(function() {
+		var value = JSON.parse($(this).val());
+		var coords = value.slice(1);
+		generateMap(value[0], coords);
 	});
 	
 	resizeSections();

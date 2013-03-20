@@ -141,7 +141,8 @@
 <?php
 	$contact_page = get_page_by_title("contact");
 ?>
-<div class="container section" id="contact">
+<div class="section">
+<div class="container" id="contact">
 	<div class="row">
 		<div class="span10 offset1">
 			<h2><?php echo apply_filters('the_title', $contact_page->post_title); ?></h2>
@@ -149,6 +150,14 @@
 		</div>
 	</div>
 </div>
+<div id="map-me"></div>
+</div>
+<?php
+if($data = get_post_meta($contact_page->ID, 'google-maps', true)) {
+	$html = '<input type="hidden" class="google-maps-init" value="'.htmlentities($data).'" />';
+	echo $html;
+}
+?>
 
 
 <?php
