@@ -80,13 +80,9 @@
 				);
 				?>
 				<div class="project" id="project-<?php echo $post->ID; ?>">
-					
-				<?php if($images) {
-					theme_render_slideshow($images, 'project-slideshow'.$post->ID);
-				}
-			?>
-				<h3><?php the_title(); ?></h3>
-				<div class="content"><?php the_content(); ?></div>
+					<div class="content">
+						<?php the_content(); ?>
+					</div>
 				</div>
 			<?php endforeach; ?>
 		</div>
