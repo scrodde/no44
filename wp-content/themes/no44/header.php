@@ -23,7 +23,6 @@
 			echo " | $site_description";
 		?>
 	</title>
-	<script type="text/javascript" src="http://fast.fonts.com/jsapi/02b9a1fa-7d76-4ade-98e8-b74fd2eeefa9.js"></script>
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 	<link href="<?php bloginfo( 'template_url' ); ?>/favicon.ico" rel="icon" type="image/x-icon" />
