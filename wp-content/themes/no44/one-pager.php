@@ -149,7 +149,19 @@
 		</div>
 	</div>
 </div>
-	
+
+
+<?php
+	$press_page = get_page_by_title("press");
+?>
+<div class="container section" id="press">
+	<div class="row">
+		<div class="span10 offset1">
+			<h2><?php echo apply_filters('the_title', $press_page->post_title); ?></h2>
+			<div class="content"><?php echo apply_filters('the_content', $press_page->post_content); ?></div>
+		</div>
+	</div>
+</div>
 
 <?php 
 	get_footer(); 

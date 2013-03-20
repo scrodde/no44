@@ -101,6 +101,95 @@ a {
 	//.clearfix;
 }
 
+.royalSlider {
+	.clearfix;
+}
+
+/* =WordPress Core
+-------------------------------------------------------------- */
+.alignnone {
+    margin: 5px 20px 20px 0;
+}
+
+.aligncenter,
+div.aligncenter {
+    display: block;
+    margin: 5px auto 5px auto;
+}
+
+.alignright {
+    float:right;
+    margin: 5px 0 20px 20px;
+}
+
+.alignleft {
+    float: left;
+    margin: 5px 20px 20px 0;
+}
+
+.aligncenter {
+    display: block;
+    margin: 5px auto 5px auto;
+}
+
+a img.alignright {
+    float: right;
+    margin: 5px 0 20px 20px;
+}
+
+a img.alignnone {
+    margin: 5px 20px 20px 0;
+}
+
+a img.alignleft {
+    float: left;
+    margin: 5px 20px 20px 0;
+}
+
+a img.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.wp-caption {
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    max-width: 96%; /* Image does not overflow the content area */
+    padding: 5px 3px 10px;
+    text-align: center;
+}
+
+.wp-caption.alignnone {
+    margin: 5px 20px 20px 0;
+}
+
+.wp-caption.alignleft {
+    margin: 5px 20px 20px 0;
+}
+
+.wp-caption.alignright {
+    margin: 5px 0 20px 20px;
+}
+
+.wp-caption img {
+    border: 0 none;
+    height: auto;
+    margin: 0;
+    max-width: 98.5%;
+    padding: 0;
+    width: auto;
+}
+
+.wp-caption p.wp-caption-text {
+    font-size: 11px;
+    line-height: 17px;
+    margin: 0;
+    padding: 0 4px 5px;
+}
+
+
+
 .widget-area-one,
 .widget-area-two {
 	z-index: 2000;
@@ -170,90 +259,12 @@ a {
 	border-top: 1px #999 dotted;
 	padding-top: 25px;
 	margin-bottom: 80px;
+	.clearfix;
 	
 	h3 {
-		margin-top: -20px;
 		margin-bottom: 0;
 		font-size: 16px;
 	}
-}
-
-.carousel {
-	width: 100%;
-	
-	.item {
-		img {
-			width: 100%;
-			height: auto;
-		}
-	}
-	
-	.indicator {
-		margin-right: 15px;
-		line-height: 20px;
-		a {
-			color: #999;
-			cursor: pointer;
-			padding: 0px 5px;
-			float: left;
-			transition: color 0.5s;
-			-moz-transition: color 0.5s; /* Firefox 4 */
-			-webkit-transition: color 0.5s; /* Safari and Chrome */
-			-o-transition: color 0.5s; /* Opera */
-		
-			&:hover {
-				text-decoration: none;
-				color: black;
-			}
-			
-			span {
-				opacity: 0;
-				transition: opacity 0.5s;
-				-moz-transition: opacity 0.5s; /* Firefox 4 */
-				-webkit-transition: opacity 0.5s; /* Safari and Chrome */
-				-o-transition: opacity 0.5s; /* Opera */
-			}
-			
-			&.active {
-				color: black;
-				
-				span {
-					opacity: 1;
-				}
-			}
-		}
-	}
-}
-
-.carousel-control {
-	top: 42%;
-	border: none;
-	background: transparent;
-	font-size: 90px;
-	color: black;
-	opacity: 1;
-	z-index: 3000;
-	padding: 30px 0;
-	transition: color 0.5s;
-	-moz-transition: color 0.5s; /* Firefox 4 */
-	-webkit-transition: color 0.5s; /* Safari and Chrome */
-	-o-transition: color 0.5s; /* Opera */
-	font-family:'HelveticaNeueW01-UltLt';
-	
-	&:hover {
-		color: #999;
-	}
-}
-
-.carousel-control.right {
-	right: -45px;
-}
-.carousel-control.left {
-	left: -45px;
-}
-
-#slideshow {
-	margin-top: 30px;
 }
 
 .thumb-container {
