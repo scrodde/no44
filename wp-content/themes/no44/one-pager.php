@@ -127,7 +127,7 @@
 			<div class="news-post">
 				<?php while($query->have_posts()) : $query->the_post(); ?>
 					<div class="news-post">
-						<h3><?php the_date(); ?><span class="delimeter">//</span></h3>
+						<h3><?php echo get_the_date(); ?><span class="delimeter">//</span></h3>
 						<div class="content"><?php the_content(); ?></div>
 					</div>
 				<?php endwhile; ?>
