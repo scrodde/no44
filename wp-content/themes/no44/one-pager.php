@@ -8,7 +8,7 @@
 <?php
   $img_data = wp_get_attachment_image_src(get_post_thumbnail_id($page->ID), 'full', false);
 ?>
-<div class="section" id="intro" style="background: url('<?php echo $img_data[0]; ?>') no-repeat center center scroll;">
+<div class="section" id="intro" style="background-image: url('<?php echo $img_data[0]; ?>');">
 </div>
 
 <div class="container section" id="work">
