@@ -5,6 +5,12 @@
  */
 	get_header();
 ?>
+<?php
+  $img_data = wp_get_attachment_image_src(get_post_thumbnail_id($page->ID), 'full', false);
+?>
+<div class="section" id="intro" style="background: url('<?php echo $img_data[0]; ?>') no-repeat center center scroll;">
+</div>
+
 <div class="container section" id="work">
 	<div class="row">
 		<div class="span1">
@@ -15,7 +21,7 @@
 			</ul>
 			&nbsp;
 		</div>
-		
+
 		<div class="span1 offset10">
 			<ul class="xoxo widget-area-two" id="widget-area-two">
 				<li>
@@ -29,15 +35,15 @@
 
 	<div class="row">
 		<div class="span10 offset1">
-			
-			<?php 
+
+			<?php
 				while(have_posts() ): the_post();
 					the_content();
 				endwhile;
 			?>
 		</div>
 	</div> <!-- .row -->
-	
+
 	<?php
 		$work_category = get_category_by_slug('work');
 		$args = array( 	'numberposts' => -1,
@@ -45,7 +51,7 @@
 						'orderby' => 'menu_order',
 						'order' => 'ASC'
  					);
-		$posts = get_posts($args); 
+		$posts = get_posts($args);
 	?>
 
 	<div class="row project-thumbnails">
@@ -56,7 +62,7 @@
 				<?php  $img_data  = theme_featured_image_src('thumbnail'); ?>
 					<div class="project-thumbnail">
 						<a href="<?php the_permalink(); ?>">
-						
+
 						<img src="<?php echo $img_data[0]; ?>" />
 						</a>
 					</div>
@@ -64,17 +70,17 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="row" id="project-listing">
 		<div class="span10 offset1">
-			<?php foreach($posts as $post) : 
+			<?php foreach($posts as $post) :
 				setup_postdata($post);
-				$images = get_children( array( 
-					'post_parent' => $post->ID, 
-					'post_type' => 'attachment', 
-					'post_mime_type' => 'image', 
-					'orderby' => 'menu_order', 
-					'order' => 'ASC', 
+				$images = get_children( array(
+					'post_parent' => $post->ID,
+					'post_type' => 'attachment',
+					'post_mime_type' => 'image',
+					'orderby' => 'menu_order',
+					'order' => 'ASC',
 					'numberposts' => 999,
 					'exclude' => get_post_thumbnail_id($post->ID) )
 				);
@@ -87,7 +93,7 @@
 			<?php endforeach; ?>
 		</div>
 	</div>
-	
+
 	<?php  /* foreach($posts as $post) : setup_postdata($post); ?>
 		<div class="row" class="project-details" id="project-<?php echo $post->ID; ?>">
 		<div class="span8 offset2">
@@ -95,7 +101,7 @@
 		</div>
 		</div>
 	<?php endforeach; */ ?>
-	
+
 </div> <!-- work container -->
 
 
@@ -103,7 +109,7 @@
 	<div class="row">
 		<div class="span10 offset1">
 			<h2>news</h2>
-				
+
 			<?php
 				$cat = get_category_by_slug('news');
 				$query = new WP_Query('cat='.$cat->term_id);
@@ -131,7 +137,7 @@
 		<div class="row">
 			<div class="span10 offset1">
 				<h2><?php echo apply_filters('the_title', $us_page->post_title); ?></h2>
-			
+
 				<div class="content"><?php echo apply_filters('the_content', $us_page->post_content); ?></div>
 			</div>
 		</div>
@@ -172,7 +178,7 @@ if($data = get_post_meta($contact_page->ID, 'google-maps', true)) {
 	</div>
 </div>
 
-<?php 
-	get_footer(); 
+<?php
+	get_footer();
 ?>
 
